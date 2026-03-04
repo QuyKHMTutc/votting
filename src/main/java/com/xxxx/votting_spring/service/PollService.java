@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import com.xxxx.votting_spring.exception.CustomException;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,7 @@ public class PollService {
     private ContentModerationService contentModerationService;
 
     @Transactional
+    @CacheEvict(value = { "poll", "activePolls" }, allEntries = true)
     public PollResponse createPoll(PollRequest request, String username) {
         // Validate content
         StringBuilder contentBuilder = new StringBuilder();
@@ -119,6 +122,7 @@ public class PollService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(value = "activePolls")
     public List<PollResponse> getActivePolls() {
         // Return only PUBLIC active polls for the homepage/list
         return pollRepository.findByModeAndIsActiveOrderByCreatedAtDesc(Poll.PollMode.PUBLIC, true)
@@ -150,6 +154,7 @@ public class PollService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(value = "poll", key = "#pollId")
     public PollResponse getPollById(Long pollId) {
         Poll poll = pollRepository.findById(pollId)
                 .orElseThrow(() -> new CustomException("Poll not found", HttpStatus.NOT_FOUND));
@@ -157,6 +162,7 @@ public class PollService {
     }
 
     @Transactional
+    @CacheEvict(value = { "poll", "activePolls" }, allEntries = true)
     public PollResponse updatePoll(Long pollId, PollRequest request, String username) {
         Poll poll = pollRepository.findById(pollId)
                 .orElseThrow(() -> new CustomException("Poll not found", HttpStatus.NOT_FOUND));
@@ -176,6 +182,7 @@ public class PollService {
     }
 
     @Transactional
+    @CacheEvict(value = { "poll", "activePolls" }, allEntries = true)
     public void deletePoll(Long pollId, String username) {
         Poll poll = pollRepository.findById(pollId)
                 .orElseThrow(() -> new CustomException("Poll not found", HttpStatus.NOT_FOUND));
@@ -190,6 +197,7 @@ public class PollService {
     }
 
     @Transactional
+    @CacheEvict(value = { "poll", "activePolls" }, allEntries = true)
     public PollResponse closePoll(Long pollId, String username) {
         Poll poll = pollRepository.findById(pollId)
                 .orElseThrow(() -> new CustomException("Poll not found", HttpStatus.NOT_FOUND));

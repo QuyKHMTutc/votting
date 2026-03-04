@@ -1,0 +1,26 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.xxxx:votting_spring >-----------------------
+[INFO] Building votting_spring 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ votting_spring ---
+[INFO] Deleting /home/guyguy/IdeaProjects/dev/votting/target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ votting_spring ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ votting_spring ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 44 source files with javac [debug parameters release 21] to target/classes
+[WARNING] /home/guyguy/IdeaProjects/dev/votting/src/main/java/com/xxxx/votting_spring/config/RedisConfig.java:[26,45] org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer in org.springframework.data.redis.serializer has been deprecated and marked for removal
+[WARNING] /home/guyguy/IdeaProjects/dev/votting/src/main/java/com/xxxx/votting_spring/config/RedisConfig.java:[43,9] org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer in org.springframework.data.redis.serializer has been deprecated and marked for removal
+[WARNING] /home/guyguy/IdeaProjects/dev/votting/src/main/java/com/xxxx/votting_spring/config/RedisConfig.java:[43,65] org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer in org.springframework.data.redis.serializer has been deprecated and marked for removal
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.404 s
+[INFO] Finished at: 2026-03-04T15:38:06+07:00
+[INFO] ------------------------------------------------------------------------
