@@ -79,6 +79,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/polls/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/polls/*/vote").permitAll() // Allow anonymous voting
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html")
+                        .permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
